@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  django:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+      - ./docs:/app/docs
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.development
+    stdin_open: true
+    tty: true
+    command: python manage.py runserver 0.0.0.0:8000
