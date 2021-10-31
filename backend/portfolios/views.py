@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from portfolios.models import Portfolio
+from portfolios.serializers import PortfolioSerializer
+from rest_framework import permissions, viewsets
 
-# Create your views here.
+
+class PortfolioViewSet(viewsets.ModelViewSet):
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer
+    permission_classes = [permissions.IsAuthenticated]
