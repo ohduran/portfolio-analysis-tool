@@ -12,6 +12,8 @@ class Stock(models.Model):
 class HistoricValue(models.Model):
 
     date_time = models.DateTimeField()
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    stock = models.ForeignKey(
+        Stock, on_delete=models.CASCADE, related_name="historic_values"
+    )
     value = models.DecimalField(max_digits=9, decimal_places=2)
     currency = models.CharField(max_length=3, default="BTC")
