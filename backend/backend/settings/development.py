@@ -11,3 +11,14 @@ ALLOWED_HOSTS = ["django", '0.0.0.0']
 INSTALLED_APPS += [
     'django_extensions',
 ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432
+    }
+}
