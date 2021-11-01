@@ -27,4 +27,4 @@ jobs:
         pip install -r backend/requirements/development.txt
     - name: Run Tests
       run: |
-        DJANGO_SETTINGS_MODULE=backend.settings.development pytest --rootdir=. backend/ 
+        DJANGO_SETTINGS_MODULE=backend.settings.development DATABASE_HOST=localhost pytest --rootdir=. backend/ 
