@@ -15,6 +15,7 @@ class PortfolioFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserFactory)
     name = factory.LazyAttribute(lambda _: fake.company())
+    currency = factory.LazyAttribute(lambda _: fake.random_uppercase_letter() * 3)
 
 
 class InvestmentFactory(factory.django.DjangoModelFactory):
