@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+from portfolios.models import Portfolio
 from rest_framework import status
 from users.tests import UserFactory
 
@@ -12,11 +13,15 @@ class TestListPortfolios:
         self, client, django_assert_num_queries
     ):
         user = UserFactory()
+        another_user = UserFactory()
         client.force_login(user)
 
         portfolios = PortfolioFactory.create_batch(5, user=user)
         for portfolio in portfolios:
             InvestmentFactory(portfolio=portfolio)
+
+        # Some portfolios that should not appear on the list
+        PortfolioFactory.create_batch(2, user=user, status=Portfolio.INACTIVE_STATUS)
 
         with django_assert_num_queries(6):
             response = client.get(reverse("portfolio-list"))

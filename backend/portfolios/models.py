@@ -1,9 +1,10 @@
 from assets.models import Asset
 from django.contrib.auth import get_user_model
 from django.db import models
+from django_extensions.db.models import ActivatorModel, TimeStampedModel
 
 
-class Portfolio(models.Model):
+class Portfolio(ActivatorModel, TimeStampedModel, models.Model):
 
     user = models.ForeignKey(
         get_user_model(), on_delete=models.PROTECT, related_name="portfolios"
