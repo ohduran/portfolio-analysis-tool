@@ -4,6 +4,10 @@ from rest_framework import permissions, viewsets
 
 
 class PortfolioViewSet(viewsets.ModelViewSet):
-    queryset = Portfolio.objects.all()
+    queryset = (
+        Portfolio.objects.prefetch_related("investments")
+        .prefetch_related("investments__asset")
+        .all()
+    )
     serializer_class = PortfolioSerializer
     permission_classes = [permissions.IsAuthenticated]

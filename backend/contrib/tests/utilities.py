@@ -9,4 +9,4 @@ def random_amount():
     >>> isinstance(random_amount(), decimal.Decimal)
     True
     """
-    return decimal.Decimal(str(random.random()))
+    return decimal.Decimal(str(random.random() * 100 - 50))

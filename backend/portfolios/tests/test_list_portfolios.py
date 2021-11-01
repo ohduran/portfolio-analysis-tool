@@ -1,7 +1,6 @@
 import pytest
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APIClient
 from users.tests import UserFactory
 
 from .factories import InvestmentFactory, PortfolioFactory
@@ -9,7 +8,9 @@ from .factories import InvestmentFactory, PortfolioFactory
 
 @pytest.mark.django_db
 class TestListPortfolios:
-    def test_example(self, client, django_user_model, django_assert_num_queries):
+    def test_givenSomePortfolios_whenListingAllPortfolios_thenAllPortfoliosAreListed(
+        self, client, django_assert_num_queries
+    ):
         user = UserFactory()
         client.force_login(user)
 
@@ -17,7 +18,7 @@ class TestListPortfolios:
         for portfolio in portfolios:
             InvestmentFactory(portfolio=portfolio)
 
-        with django_assert_num_queries(4):
+        with django_assert_num_queries(6):
             response = client.get(reverse("portfolio-list"))
 
         assert response.status_code == status.HTTP_200_OK
@@ -30,7 +31,14 @@ class TestListPortfolios:
                 {
                     "id": portfolio.id,
                     "name": portfolio.name,
-                    "user": user.id,
+                    "investments": [
+                        {
+                            "id": investment.id,
+                            "amount": str(investment.amount),
+                            "asset": investment.asset.symbol,
+                        }
+                        for investment in portfolio.investments.all()
+                    ],
                 }
                 for portfolio in portfolios
             ],
