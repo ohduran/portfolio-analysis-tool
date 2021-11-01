@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     # https://docs.djangoproject.com/en/dev/ref/applications/#django.apps.AppConfig
     "portfolios.apps.PortfoliosConfig",
-    "stocks.apps.StocksConfig",
+    "assets.apps.AssetsConfig",
     "users.apps.UsersConfig",
 ]
 
