@@ -1,6 +1,8 @@
+from portfolios import serializers
 from portfolios.models import Portfolio
-from portfolios.serializers import PortfolioSerializer
 from rest_framework import permissions, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class PortfolioViewSet(viewsets.ModelViewSet):
@@ -11,5 +13,11 @@ class PortfolioViewSet(viewsets.ModelViewSet):
         .order_by("id")
         .all()
     )
-    serializer_class = PortfolioSerializer
+    serializer_class = serializers.PortfolioSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    @action(detail=True)
+    def sectors(self, request, pk=None):
+        portfolio = self.get_object()
+        serializer = serializers.SectorPortfolioSerializer(portfolio)
+        return Response(serializer.data)

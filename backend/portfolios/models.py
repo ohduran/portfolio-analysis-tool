@@ -10,7 +10,9 @@ class Portfolio(ActivatorModel, TimeStampedModel, models.Model):
         get_user_model(), on_delete=models.PROTECT, related_name="portfolios"
     )
     name = models.CharField(max_length=100)
-    currency = models.CharField(max_length=3)
+    currency = models.CharField(
+        max_length=3
+    )  # TODO: Forex market is To Be Defined into a new app. Out of scope.
 
 
 class Investment(models.Model):
@@ -24,4 +26,8 @@ class Investment(models.Model):
     asset = models.ForeignKey(
         Asset, on_delete=models.PROTECT, related_name="investments"
     )
-    amount = models.DecimalField(max_digits=9, decimal_places=2)
+    amount = models.DecimalField(
+        max_digits=9,
+        decimal_places=2,
+        help_text="The number of shares, the amount of commodity bought, etc.",
+    )

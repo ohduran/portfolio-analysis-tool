@@ -1,3 +1,5 @@
+import random
+
 import factory
 from contrib.tests.utilities import random_amount
 from faker import Faker
@@ -15,6 +17,7 @@ class AssetFactory(factory.django.DjangoModelFactory):
         lambda _: fake.random_uppercase_letter() * fake.random_int(min=1, max=6)
     )
     name = factory.LazyAttribute(lambda _: fake.company())
+    sector = factory.LazyAttribute(lambda _: random.choice(Asset.SECTORS_CHOICES)[0])
 
 
 class HistoricValueFactory(factory.django.DjangoModelFactory):
