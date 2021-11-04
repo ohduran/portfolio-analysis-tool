@@ -3,3 +3,6 @@ https://github.com/django/django/archive/main.tar.gz
 https://github.com/encode/django-rest-framework/archive/master.tar.gz
 
 psycopg2-binary==2.9.1
+celery==5.1.2
+flower==1.0.0
+redis==3.5.3
