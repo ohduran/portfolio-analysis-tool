@@ -37,3 +37,6 @@ if os.environ.get("GITHUB_WORKFLOW"):
             "PORT": "5432",
         }
     }
+
+CELERY_BROKER = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379/0")
+CELERY_BACKEND = os.environ.get("CELERY_BACKEND", "redis://127.0.0.1:6379/0")

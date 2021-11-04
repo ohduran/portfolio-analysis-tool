@@ -1,5 +1,6 @@
 version: "3.9"
 services:
+
   django:
     build: ./backend
     volumes:
@@ -9,11 +10,15 @@ services:
       - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=backend.settings.development
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
     stdin_open: true
     tty: true
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
+      - redis
+
   db:
     image: postgres:latest
     volumes:
@@ -21,6 +26,48 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  redis:
+    image: redis:latest
+
+  celery_worker:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+    command: celery -A backend beat -l INFO
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.development
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+  
+  celery_beat:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+    command: celery -A backend worker -l INFO
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.development
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+  
+  flower:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+    command: celery -A backend --broker="${CELERY_BROKER}" flower
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.development
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
 
 volumes:
   postgres_data:
