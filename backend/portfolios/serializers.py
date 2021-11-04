@@ -41,7 +41,3 @@ class PortfolioSerializer(serializers.ModelSerializer):
             for investment_data in investments:
                 Investment.objects.create(portfolio=portfolio, **investment_data)
         return portfolio
-
-
-class SectorPortfolioSerializer(serializers.Serializer):
-    pass
