@@ -32,7 +32,9 @@ class Asset(models.Model):
 
     # Assets listed on the New York Asset Exchange (NYSE) can have four or fewer letters.
     # Nasdaq-listed securities can have up to five characters.
-    symbol = models.CharField(max_length=6)
+    symbol = models.CharField(
+        max_length=6, help_text="The exchange symbol that this item is traded under."
+    )
     name = models.TextField()
     sector = models.CharField(max_length=2, choices=SECTORS_CHOICES)
 
@@ -46,7 +48,42 @@ class HistoricValue(models.Model):
     asset = models.ForeignKey(
         Asset, on_delete=models.CASCADE, related_name="historic_values"
     )
-    value = models.DecimalField(max_digits=9, decimal_places=2)
     currency = models.CharField(
         max_length=3
     )  # TODO: Forex market is To Be Defined into a new app. Out of scope.
+
+    after_hours = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The close price of the ticker symbol in after hours trading.",
+    )
+    close = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The close price for the symbol in the given time period.",
+    )
+    high = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The highest price for the symbol in the given time period.",
+    )
+    low = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The lowest price for the symbol in the given time period.",
+    )
+    _open = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The open price for the symbol in the given time period.",
+    )
+    pre_market = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text="The open price of the ticker symbol in pre-market trading.",
+    )
+    volume = models.DecimalField(
+        max_digits=19,
+        decimal_places=3,
+        help_text="The trading volume of the symbol in the given time period.",
+    )

@@ -12,6 +12,14 @@ WORKDIR /app/backend
 COPY ./requirements /app/backend/requirements
 RUN pip install -r requirements/development.txt
 
+COPY ./entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
+
+COPY ./start /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
+
 # Add the rest of the code
 COPY . /app/backend
 
@@ -20,4 +28,4 @@ EXPOSE 8000
 
 # Be sure to use 0.0.0.0 for the host within the Docker container,
 # otherwise the browser won't be able to find it
-CMD python manage.py runserver 0.0.0.0:8000
+ENTRYPOINT ["/entrypoint"]
