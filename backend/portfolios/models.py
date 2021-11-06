@@ -20,6 +20,9 @@ class Portfolio(ActivatorModel, TimeStampedModel, models.Model):
         max_length=3
     )  # TODO: Forex market is To Be Defined into a new app. Out of scope.
 
+    def __str__(self):
+        return self.name
+
 
 class Investment(models.Model):
     """
@@ -44,3 +47,6 @@ class Investment(models.Model):
         decimal_places=2,
         help_text="The number of shares, the amount of commodity bought, etc.",
     )
+
+    def __str__(self):
+        return f"{self.amount} of {self.asset} for portfolio {self.portfolio}"

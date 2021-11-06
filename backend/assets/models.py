@@ -41,7 +41,7 @@ class Asset(models.Model):
     sector = models.CharField(max_length=2, choices=SECTORS_CHOICES)
 
     def __str__(self):
-        return self.symbol
+        return f"{self.name} ({self.symbol})"
 
 
 class HistoricValue(models.Model):
@@ -96,3 +96,6 @@ class HistoricValue(models.Model):
         decimal_places=3,
         help_text="The trading volume of the symbol in the given time period.",
     )
+
+    def __str__(self):
+        return f"{self.asset.symbol} ({self.date_time}): {self.currency}{self.close}"

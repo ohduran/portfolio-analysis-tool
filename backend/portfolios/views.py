@@ -16,7 +16,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
         .all()
     )
     serializer_class = serializers.PortfolioSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     @action(detail=True)
     def sectors(self, request, pk=None):

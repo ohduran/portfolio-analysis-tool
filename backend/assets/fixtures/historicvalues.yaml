@@ -1,0 +1,65 @@
+- model: assets.historicvalue
+  pk: 1
+  fields:
+    date_time: 2021-11-05 00:00:00+00:00
+    asset: 1
+    currency: USD
+    after_hours: '151.050'
+    close: '151.280'
+    high: '152.200'
+    low: '150.060'
+    _open: '151.890'
+    pre_market: '150.940'
+    volume: '65163883.000'
+- model: assets.historicvalue
+  pk: 2
+  fields:
+    date_time: 2021-11-05 00:00:00+00:00
+    asset: 2
+    currency: USD
+    after_hours: '406.800'
+    close: '407.080'
+    high: '414.450'
+    low: '406.100'
+    _open: '411.400'
+    pre_market: '408.600'
+    volume: '2105586.000'
+- model: assets.historicvalue
+  pk: 3
+  fields:
+    date_time: 2021-11-05 00:00:00+00:00
+    asset: 3
+    currency: USD
+    after_hours: '224.150'
+    close: '224.460'
+    high: '224.580'
+    low: '217.700'
+    _open: '217.700'
+    pre_market: '212.950'
+    volume: '16936327.000'
+- model: assets.historicvalue
+  pk: 4
+  fields:
+    date_time: 2021-11-05 00:00:00+00:00
+    asset: 4
+    currency: USD
+    after_hours: '494.000'
+    close: '495.880'
+    high: '507.210'
+    low: '492.420'
+    _open: '505.760'
+    pre_market: '506.350'
+    volume: '486378.000'
+- model: assets.historicvalue
+  pk: 5
+  fields:
+    date_time: 2021-11-05 00:00:00+00:00
+    asset: 5
+    currency: USD
+    after_hours: '64.050'
+    close: '64.050'
+    high: '64.200'
+    low: '63.150'
+    _open: '63.460'
+    pre_market: '63.020'
+    volume: '3085509.000'
