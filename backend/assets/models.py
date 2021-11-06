@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Asset(models.Model):
+    class Meta:
+        constraints = (models.UniqueConstraint("symbol", name="unique_symbol_asset"),)
 
     # GICS Market Sectors
     ENERGY = "EN"
@@ -43,6 +45,13 @@ class Asset(models.Model):
 
 
 class HistoricValue(models.Model):
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=("asset", "date_time"),
+                name="unique_asset_date_time_historic_value",
+            ),
+        )
 
     date_time = models.DateTimeField()
     asset = models.ForeignKey(

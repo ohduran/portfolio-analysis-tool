@@ -17,17 +17,17 @@ def get_stocks_equities_daily_open_close(asset: Asset, date_time: datetime) -> N
         )
 
     if response.status == "OK":
-        historic_value = HistoricValue(
+        HistoricValue.objects.get_or_create(
             asset=asset,
-            currency="USD",
             date_time=date_time.replace(hour=0, minute=0, second=0, microsecond=0),
-            after_hours=response.after_hours,
-            close=response.close,
-            high=response.high,
-            low=response.low,
-            _open=response.open,
-            pre_market=response.pre_market,
-            volume=response.volume,
+            defaults={
+                "currency": "USD",
+                "after_hours": response.after_hours,
+                "close": response.close,
+                "high": response.high,
+                "low": response.low,
+                "_open": response.open,
+                "pre_market": response.pre_market,
+                "volume": response.volume,
+            },
         )
-
-        historic_value.save()

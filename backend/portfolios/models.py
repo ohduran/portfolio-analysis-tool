@@ -5,6 +5,12 @@ from django_extensions.db.models import ActivatorModel, TimeStampedModel
 
 
 class Portfolio(ActivatorModel, TimeStampedModel, models.Model):
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=("user", "name"), name="unique_user_name_portfolio"
+            ),
+        )
 
     user = models.ForeignKey(
         get_user_model(), on_delete=models.PROTECT, related_name="portfolios"
@@ -19,6 +25,13 @@ class Investment(models.Model):
     """
     The currency of each investment is assumed to be the portfolio's.
     """
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=("portfolio", "asset"), name="unique_portfolio_asset_investment"
+            ),
+        )
 
     portfolio = models.ForeignKey(
         Portfolio, on_delete=models.PROTECT, related_name="investments"
