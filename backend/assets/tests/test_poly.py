@@ -43,7 +43,7 @@ class TestPolygon:
         user = UserFactory()
         client.force_login(user)
 
-        with django_assert_num_queries(1):
+        with django_assert_num_queries(4):
             get_stocks_equities_daily_open_close(asset, datetime.now(timezone.utc))
 
         asset.refresh_from_db()

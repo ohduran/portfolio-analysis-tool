@@ -65,16 +65,24 @@ class TestListPortfolios:
 
         # 4 investments under IT
         IT_asset_1 = AssetFactory(sector=Asset.INFORMATION_TECHNOLOGY)
+        with freeze_time("2021-10-03"):
+            HistoricValueFactory(asset=IT_asset_1)
+        with freeze_time("2021-10-04"):
+            HistoricValueFactory(asset=IT_asset_1)
         with freeze_time("2021-10-05"):
-            HistoricValueFactory.create_batch(3, asset=IT_asset_1)
+            HistoricValueFactory(asset=IT_asset_1)
         with freeze_time("2021-10-06"):
             last_historic_value_IT_asset_1 = HistoricValueFactory(
                 asset=IT_asset_1, close=1
             )
 
         IT_asset_2 = AssetFactory(sector=Asset.INFORMATION_TECHNOLOGY)
+        with freeze_time("2021-10-05"):
+            HistoricValueFactory(asset=IT_asset_2)
+        with freeze_time("2021-10-06"):
+            HistoricValueFactory(asset=IT_asset_2)
         with freeze_time("2021-10-07"):
-            HistoricValueFactory.create_batch(3, asset=IT_asset_2)
+            HistoricValueFactory(asset=IT_asset_2)
         with freeze_time("2021-10-08"):
             last_historic_value_IT_asset_2 = HistoricValueFactory(
                 asset=IT_asset_2, close=2
@@ -89,16 +97,24 @@ class TestListPortfolios:
 
         # 2 investments under RE
         RE_asset_1 = AssetFactory(sector=Asset.REAL_ESTATE)
+        with freeze_time("2021-10-07"):
+            HistoricValueFactory(asset=RE_asset_1)
+        with freeze_time("2021-10-08"):
+            HistoricValueFactory(asset=RE_asset_1)
         with freeze_time("2021-10-09"):
-            HistoricValueFactory.create_batch(3, asset=RE_asset_1)
+            HistoricValueFactory(asset=RE_asset_1)
         with freeze_time("2021-10-10"):
             last_historic_value_RE_asset_1 = HistoricValueFactory(
                 asset=RE_asset_1, close=3
             )
 
         RE_asset_2 = AssetFactory(sector=Asset.REAL_ESTATE)
+        with freeze_time("2021-10-09"):
+            HistoricValueFactory(asset=RE_asset_2)
+        with freeze_time("2021-10-10"):
+            HistoricValueFactory(asset=RE_asset_2)
         with freeze_time("2021-10-11"):
-            HistoricValueFactory.create_batch(3, asset=RE_asset_2)
+            HistoricValueFactory(asset=RE_asset_2)
         with freeze_time("2021-10-12"):
             last_historic_value_RE_asset_2 = HistoricValueFactory(
                 asset=RE_asset_2, close=5
@@ -113,8 +129,12 @@ class TestListPortfolios:
 
         # An investment under FI
         FI_asset = AssetFactory(sector=Asset.FINANCIALS)
+        with freeze_time("2021-10-11"):
+            HistoricValueFactory(asset=FI_asset)
+        with freeze_time("2021-10-12"):
+            HistoricValueFactory(asset=FI_asset)
         with freeze_time("2021-10-13"):
-            HistoricValueFactory.create_batch(3, asset=FI_asset)
+            HistoricValueFactory(asset=FI_asset)
         with freeze_time("2021-10-14"):
             last_historic_value_FI_asset = HistoricValueFactory(
                 asset=FI_asset, close=13
