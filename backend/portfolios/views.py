@@ -30,7 +30,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
             invested_amounts = [
                 investment.amount
-                * investment.asset.historic_values.order_by("date_time").last().value
+                * investment.asset.historic_values.order_by("date_time").last().close
                 for investment in sector_investments
             ]
 

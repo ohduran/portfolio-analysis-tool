@@ -12,9 +12,14 @@ services:
       - DJANGO_SETTINGS_MODULE=backend.settings.development
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     stdin_open: true
     tty: true
-    command: python manage.py runserver 0.0.0.0:8000
+    command: /start
     depends_on:
       - db
       - redis
@@ -24,8 +29,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
 
   redis:
     image: redis:latest
@@ -39,10 +47,16 @@ services:
       - DJANGO_SETTINGS_MODULE=backend.settings.development
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     depends_on:
       - db
       - redis
-  
+      - django
+
   celery_beat:
     build: ./backend
     volumes:
@@ -52,10 +66,16 @@ services:
       - DJANGO_SETTINGS_MODULE=backend.settings.development
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     depends_on:
       - db
       - redis
-  
+      - django
+
   flower:
     build: ./backend
     volumes:
@@ -65,9 +85,17 @@ services:
       - DJANGO_SETTINGS_MODULE=backend.settings.development
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     depends_on:
       - db
       - redis
+      - django
+    ports:
+      - "5555:5555"
 
 volumes:
   postgres_data:

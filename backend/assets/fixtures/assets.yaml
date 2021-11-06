@@ -1,0 +1,30 @@
+- model: assets.asset
+  pk: 1
+  fields:
+    symbol: AAPL
+    name: Apple Inc.
+    sector: IT
+- model: assets.asset
+  pk: 2
+  fields:
+    symbol: GS
+    name: Goldman Sachs Group Inc. (The)
+    sector: FI
+- model: assets.asset
+  pk: 3
+  fields:
+    symbol: BA
+    name: The Boeing Company
+    sector: IN
+- model: assets.asset
+  pk: 4
+  fields:
+    symbol: DPZ
+    name: Domino's Pizza Inc
+    sector: CD
+- model: assets.asset
+  pk: 5
+  fields:
+    symbol: EIX
+    name: Edison International
+    sector: UT

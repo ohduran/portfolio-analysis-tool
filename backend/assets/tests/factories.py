@@ -28,5 +28,12 @@ class HistoricValueFactory(factory.django.DjangoModelFactory):
     date_time = factory.LazyAttribute(lambda _: timezone.now())
     asset = factory.SubFactory(AssetFactory)
 
-    value = factory.LazyAttribute(lambda _: random_positive_amount())
     currency = "EUR"
+
+    after_hours = factory.LazyAttribute(lambda _: random_positive_amount())
+    pre_market = factory.LazyAttribute(lambda _: random_positive_amount())
+    close = factory.LazyAttribute(lambda _: random_positive_amount())
+    high = factory.LazyAttribute(lambda _: random_positive_amount())
+    low = factory.LazyAttribute(lambda _: random_positive_amount())
+    _open = factory.LazyAttribute(lambda _: random_positive_amount())
+    volume = factory.LazyAttribute(lambda _: random_positive_amount())

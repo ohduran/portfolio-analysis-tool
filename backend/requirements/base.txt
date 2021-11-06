@@ -6,3 +6,9 @@ psycopg2-binary==2.9.1
 celery==5.1.2
 flower==1.0.0
 redis==3.5.3
+
+polygon-api-client==0.2.11
+PyYAML==6.0
+
+django-environ==0.8.1
+django-extensions==3.1.3

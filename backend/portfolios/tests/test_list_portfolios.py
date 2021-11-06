@@ -69,7 +69,7 @@ class TestListPortfolios:
             HistoricValueFactory.create_batch(3, asset=IT_asset_1)
         with freeze_time("2021-10-06"):
             last_historic_value_IT_asset_1 = HistoricValueFactory(
-                asset=IT_asset_1, value=1
+                asset=IT_asset_1, close=1
             )
 
         IT_asset_2 = AssetFactory(sector=Asset.INFORMATION_TECHNOLOGY)
@@ -77,7 +77,7 @@ class TestListPortfolios:
             HistoricValueFactory.create_batch(3, asset=IT_asset_2)
         with freeze_time("2021-10-08"):
             last_historic_value_IT_asset_2 = HistoricValueFactory(
-                asset=IT_asset_2, value=2
+                asset=IT_asset_2, close=2
             )
 
         IT_investment_1 = InvestmentFactory(
@@ -93,7 +93,7 @@ class TestListPortfolios:
             HistoricValueFactory.create_batch(3, asset=RE_asset_1)
         with freeze_time("2021-10-10"):
             last_historic_value_RE_asset_1 = HistoricValueFactory(
-                asset=RE_asset_1, value=3
+                asset=RE_asset_1, close=3
             )
 
         RE_asset_2 = AssetFactory(sector=Asset.REAL_ESTATE)
@@ -101,7 +101,7 @@ class TestListPortfolios:
             HistoricValueFactory.create_batch(3, asset=RE_asset_2)
         with freeze_time("2021-10-12"):
             last_historic_value_RE_asset_2 = HistoricValueFactory(
-                asset=RE_asset_2, value=5
+                asset=RE_asset_2, close=5
             )
 
         RE_investment_1 = InvestmentFactory(
@@ -117,7 +117,7 @@ class TestListPortfolios:
             HistoricValueFactory.create_batch(3, asset=FI_asset)
         with freeze_time("2021-10-14"):
             last_historic_value_FI_asset = HistoricValueFactory(
-                asset=FI_asset, value=13
+                asset=FI_asset, close=13
             )
 
         FI_investment = InvestmentFactory(
@@ -133,15 +133,15 @@ class TestListPortfolios:
             {
                 "sector": "FI",
                 "total_invested": float(
-                    FI_investment.amount * last_historic_value_FI_asset.value
+                    FI_investment.amount * last_historic_value_FI_asset.close
                 ),
             },
             {
                 "sector": "IT",
                 "total_invested": sum(
                     [
-                        IT_investment_1.amount * last_historic_value_IT_asset_1.value,
-                        IT_investment_2.amount * last_historic_value_IT_asset_2.value,
+                        IT_investment_1.amount * last_historic_value_IT_asset_1.close,
+                        IT_investment_2.amount * last_historic_value_IT_asset_2.close,
                     ]
                 ),
             },
@@ -151,9 +151,9 @@ class TestListPortfolios:
                     sum(
                         [
                             RE_investment_1.amount
-                            * last_historic_value_RE_asset_1.value,
+                            * last_historic_value_RE_asset_1.close,
                             RE_investment_2.amount
-                            * last_historic_value_RE_asset_2.value,
+                            * last_historic_value_RE_asset_2.close,
                         ]
                     )
                 ),
