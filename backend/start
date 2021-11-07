@@ -6,5 +6,5 @@ set -o nounset
 
 python manage.py migrate
 
-python manage.py loaddata assets historicvalues admin
+python manage.py loaddata admin assets historicvalues portfolios
 python manage.py runserver 0.0.0.0:8000

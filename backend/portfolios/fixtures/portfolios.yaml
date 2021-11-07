@@ -1,0 +1,41 @@
+- model: portfolios.portfolio
+  pk: 1
+  fields:
+    created: 2021-11-07 09:44:53.113276+00:00
+    modified: 2021-11-07 09:44:53.113292+00:00
+    status: 1
+    activate_date: 2021-11-07 09:44:53.112855+00:00
+    deactivate_date: null
+    user: 1
+    name: Test Portfolio
+    currency: USD
+- model: portfolios.investment
+  pk: 1
+  fields:
+    portfolio: 1
+    asset: 1
+    amount: '100.00'
+- model: portfolios.investment
+  pk: 2
+  fields:
+    portfolio: 1
+    asset: 2
+    amount: '200.00'
+- model: portfolios.investment
+  pk: 3
+  fields:
+    portfolio: 1
+    asset: 3
+    amount: '300.00'
+- model: portfolios.investment
+  pk: 4
+  fields:
+    portfolio: 1
+    asset: 4
+    amount: '40.00'
+- model: portfolios.investment
+  pk: 5
+  fields:
+    portfolio: 1
+    asset: 5
+    amount: '1000.00'
