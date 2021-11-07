@@ -1,5 +1,5 @@
 # Technical Showcase - Portfolio Analysis Tool
-The following project is a prototype of a portfolio analysis tool.
+This project is the prototype of a portfolio analysis tool.
 
 ## How to set it up
 
@@ -7,7 +7,7 @@ The project can be set up by running `docker-compose up` on the root of the proj
 A Django-based web service will be spun up (see 0.0.0.0:8000), along with a PostgreSQL database, a Celery worker, the Celery beat that handles recurrent tasks, and a Flower dashboard (see ...), along with a Redis instance that enables the Celery tasks.
 
 Upon first boot, the fixtures with a predefined set of assets and historic values will be added to the database. A superuser
-with username and password `admin` will also be added to ease access to the admin site (see 0.0.0.0:8000/admin). For more information on the database tables and their relationship, see [Database Models](/#database-models).
+with username and password `admin` will also be added to ease access to the admin site (see 0.0.0.0:8000/admin). For more information on the database tables and their relationship, see [Database Models](#database-models).
 
 ## Database Models
 
